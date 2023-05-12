@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  
+body{
+    background-color: black;
+ }
+
+#Home{
+    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+#Footer {
+    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640027182bd1b6ef777b221a_footer-vector.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.work{
+    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@keyframes rotateAnimation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.lets-work-text {
+   
+    animation: rotateAnimation 10s infinite linear;
+  }
