@@ -82,7 +82,9 @@ const Expreiance = () => {const experiences = [
           </table>
         </div>
       </div>
-      <div className="flex flex-col mt-16 text-white items-center">
+
+    </div>
+    <div className="flex flex-col mt-16 text-white items-center">
     <hr className="border-gray-300 my-4 w-full" />
     <div className="grid-cols-1 grid text-2xl md:grid-cols-3 gap-2 justify-center items-center ">
       {stats.map((stat) => (
@@ -94,7 +96,6 @@ const Expreiance = () => {const experiences = [
     </div>
     <hr className="border-gray-300 my-4 w-full" />
   </div>
-    </div>
   </div>
 
 

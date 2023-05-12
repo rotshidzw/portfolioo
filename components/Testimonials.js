@@ -6,7 +6,7 @@ const Testimonials = () => {
     <>
 <div className="text-lg md:text-7xl  mb-4 mt-20 text-white flex flex-row justify-between  items-center">
   <h1 className="md:text-left  font-bold">TESTIMONIALS</h1>
-  <h3 className="text-sm md:text-3xl justify-end text-right">WHAT MY TEAMMATE&apos;S ARE SAYING  <FontAwesomeIcon icon={faPlayCircle} className="mr-2 text-gray-500 hover:text-white md:text-3xl text-md" /></h3>
+  <h3 className="text-sm md:text-3xl justify-end text-right">WHAT MY TEAMMATE&apos;S ARE SAYING </h3>
 </div>
 <div className="text-center mt-28 text-white md:text-4xl italic max-w-5xl mx-auto">
     <p>

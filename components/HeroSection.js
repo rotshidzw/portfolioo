@@ -25,28 +25,28 @@ function HeroSection() {
    <>
 
   <section className=" inset-0 bg-gradient-to-r from-black to-pink-950" id="Home">
-   <Modal
-      isOpen={isModalOpen}
-      onRequestClose={closeModal}
-      contentLabel="Video Modal"
+  <Modal
+  isOpen={isModalOpen}
+  onRequestClose={closeModal}
+  contentLabel="Video Modal"
+  className="bg-black  text-white  bg-gradient-to-r from-black to-pink-950 h-full"
+>
+  <button onClick={closeModal} className="text-md font-bold">CLOSE</button>
+  <div className="flex justify-center items-center h-full ">
+    <iframe
+      src="https://www.youtube.com/embed/WILXp4WNSsY?autoplay=1"
+      frameBorder="0"
+      allowFullScreen
+      title="Video"
+      className="w-full sm:w-3/4 h-full sm:h-3/4  rounded-md"
+    ></iframe>
+  </div>
+</Modal>
 
-    >
-      <button onClick={closeModal} className='text-md  font-bold'>CLOSE</button>
-      <div className="flex justify-center items-center h-full border rounded-md bg-gradient-to-r from-black to-pink-950">
-  <iframe
-    src="https://www.youtube.com/embed/WILXp4WNSsY?autoplay=1"
-    frameBorder="0"
-    allowFullScreen
-    title="Video"
-    className="w-3/4 h-3/4 border rounded-md"
-  ></iframe>
-</div>
-
-    </Modal>
     <div className="px-6 py-2 md:px-2  text-white text-left lg:text-left">
       <div className="container mx-auto xl:px-3">
         <div className="grid md:grid-cols-2 gap-20  items-center">
-          <div className="mt-12 lg:mt-0">
+          <div className="mt-2 lg:mt-0">
             <h1 className="text-5xl md:text-6xl xl:text-9xl font-bold tracking-tight mb-12">Creative <br /><span className="text-white">Developer</span></h1>
             <p className="md:text-3xl  text-xl">I’m a Full Stack Developer & Software Engineer based in South Africa, johannesburg.</p>
           </div>
@@ -56,7 +56,7 @@ function HeroSection() {
               className=" rounded   shadow-lg "
               alt=""
             />
-            <span className="text-3xl  font-bold">Mavhungu R.C  <FontAwesomeIcon icon={faPlayCircle} className="mr-2 cursor-pointer border rounded-full bg-gradient-to-r from-black to-pink-950 hover:text-black hover:bg-gradient-to-r hover:from-white hover:to-pink-200 md:text-3xl text-md" onClick={openModal} /></span>
+            <span className="text-3xl  font-bold">Mavhungu R.C  <FontAwesomeIcon icon={faPlayCircle} className="mr-2 mt-4 cursor-pointer border rounded-full bg-gradient-to-r from-black to-pink-950 hover:text-black hover:bg-gradient-to-r hover:from-white hover:to-pink-200 md:text-3xl text-md" onClick={openModal} /></span>
           </div>
         </div>
       </div>
