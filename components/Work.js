@@ -91,19 +91,19 @@ const Experiance = () => {
   </div>
   <div className="bg-white rounded-lg shadow-lg">
  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C4D2DAQHRh0zghIg-fw/profile-treasury-image-shrink_800_800/0/1661087307885?e=1683993600&v=beta&t=x6VlJeJWHk7pogj_FufjQ8zgvS37CKc2Svi8Zrnq8cw" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
+    <img src="https://user-images.githubusercontent.com/69056906/238276480-1e5266b6-5bf9-4000-afc4-12a454e905ff.png" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
     <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">TVMaze</h3>
-      <p className="text-gray-600 mb-4">an api based app to show lastest shows (movies , series)</p>
+      <h3 className="text-xl font-bold mb-2"></h3>
+      <p className="text-gray-600 mb-4">A simple and interractive React App that utilises an external space X API to provide information about space rockets and missions. User can reserve rockets, join mission and these can be viewed in a the user's profile. A user can also read more about the rockets and missions.</p>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://hammaazarok.github.io/javascript-capstone/" className="flex items-center text-purple-600">
+      <a href="https://space-travelers-hubs.netlify.app/" className="flex items-center text-purple-600">
         Go Live
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
         </svg>
       </a>
 
-      <a href="https://github.com/hammaazarok/javascript-capstone" className="flex items-center text-purple-600">
+      <a href="https://github.com/rotshidzw/space-travelers-hub/tree/main" className="flex items-center text-purple-600">
         Git code
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
@@ -114,7 +114,7 @@ const Experiance = () => {
   </div>
   <div className="bg-white rounded-lg shadow-lg">
  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C562DAQHJY9NqVsCPBQ/profile-treasury-image-shrink_800_800/0/1679164086369?e=1683993600&v=beta&t=fIa7AxWDVMwOVxcuOwtBhupI8QFTdTdf8KpyIpfhZRs" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
+    <img src="https://user-images.githubusercontent.com/69056906/238199732-ec4449a8-2a49-4698-b010-d80d8be0865c.png" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
     <div className="p-4">
       <h3 className="text-xl font-bold mb-2">Real State Agent</h3>
       <p className="text-gray-600 mb-4">real state agent web page I’ve helped families determine their home’s worth, set the right price, and negotiate a winning deal.</p>
@@ -137,7 +137,7 @@ const Experiance = () => {
   </div>
   <div className="bg-white rounded-lg shadow-lg">
  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C562DAQFw1l0l09Cblw/profile-treasury-image-shrink_800_800/0/1679163982680?e=1683993600&v=beta&t=iOb2wSALsmJrXPY-CyuFBPo0SzN7caqQ6z5J43RlHRs" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
+    <img src="https://user-images.githubusercontent.com/69056906/224443795-3abb62e3-b3d5-4f36-88ea-79cea142eb60.png" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
     <div className="p-4">
       <h3 className="text-xl font-bold mb-2">Anti Da Menace landing page</h3>
       <p className="text-gray-600 mb-4">shows off his youtube videos and his playlist its done by using googleapi to show all the info the rapper antidamanace including the functioning contact form furthermore the about which include who he is</p>
