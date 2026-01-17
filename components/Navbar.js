@@ -1,27 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
 
 const BottomNavItem = ({ label, onClick, isActive, children }) => {
-  const words = label.split(' ');
-
   return (
     <button
       type="button"
       onClick={onClick}
       aria-current={isActive ? 'true' : undefined}
-      className={`inline-flex flex-col items-center justify-center px-3 py-1 transition-all duration-200 hover:bg-black hover:-translate-y-0.5 md:px-2 md:py-2 md:text-sm ${
+      className={`inline-flex flex-col items-center justify-center px-3 py-2 transition-all duration-200 hover:bg-black hover:-translate-y-0.5 md:px-4 md:py-2 ${
         isActive ? 'bg-black text-white' : 'text-white'
       }`}
     >
       {children}
-      <span className={`text-[10px] uppercase text-center leading-tight ${isActive ? 'text-white' : 'text-white/80'} md:text-[11px]`}>
-        <span className="md:hidden">{label}</span>
-        <span className="hidden md:block">
-          {words.map((word) => (
-            <span key={word} className="block">
-              {word}
-            </span>
-          ))}
-        </span>
+      <span
+        className={`text-[11px] uppercase tracking-wide ${isActive ? 'text-white' : 'text-white/80'} md:text-sm`}
+      >
+        {label}
       </span>
     </button>
   );
@@ -75,8 +68,8 @@ const Nav = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-white/10 bg-black/80 backdrop-blur-sm md:bottom-6 md:left-1/2 md:h-12 md:w-full md:max-w-xs md:-translate-x-1/2 md:rounded-full md:border md:border-white/10">
-      <div className="mx-auto grid h-14 max-w-md grid-cols-4 font-medium md:h-12 md:max-w-xs">
+    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-white/10 bg-black/80 backdrop-blur-sm md:bottom-6 md:left-1/2 md:h-16 md:w-full md:max-w-lg md:-translate-x-1/2 md:rounded-full md:border md:border-white/10">
+      <div className="mx-auto grid h-16 max-w-lg grid-cols-4 font-medium">
         {navItems.map((item) => (
           <BottomNavItem
             key={item.id}
