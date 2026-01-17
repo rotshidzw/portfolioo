@@ -5,41 +5,36 @@ const AboutPage = () => {
     <>
       <SectionTitle id="About" title="ABOUT ME" align="start" />
       <div className="flex flex-col items-center text-white justify-center md:px-20 py-10 md:py-16">
-        <div className="px-4 mb-8 md:mb-0 md:mr-8">
-          <p className="text-sm md:text-left md:max-w-5xl italic md:text-xl leading-relaxed">
-            I am a passionate web developer with 3 years of experience in creating custom websites and web applications. My
-            mission is to help businesses and organizations achieve their goals through effective and efficient web development
-            solutions. As a dedicated web developer, I am committed to staying up-to-date with the latest technologies and trends
-            in the industry. I approach each project with enthusiasm, creativity, and a focus on delivering a high-quality end
-            product that meets the unique needs of each client. With a passion for innovation and an eye for detail, I specialize
-            in creating intuitive and user-friendly web experiences. My goal is to not only meet but exceed my clients' expectations
-            and deliver exceptional results every time.
+        <div className="px-4 mb-10 md:mb-12">
+          <p className="text-sm md:text-left md:max-w-5xl md:text-xl leading-relaxed text-white/80">
+            I&apos;m a full stack developer who blends UI craft with systems thinking. From marketing sites to analytics
+            dashboards, I focus on clean architecture, performance, and real business outcomes. I love translating complex
+            ideas into simple, human experiences.
           </p>
         </div>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-5xl">
-          <div className="border border-white/10 rounded-lg p-4 md:p-0 md:border-0">
-            <h2 className="text-2xl font-bold mb-4">STRATEGY</h2>
-            <ul className="list-disc text-sm md:text-lg list-inside mb-4">
-              <li>Brand Building</li>
-              <li>Marketing</li>
-              <li>Communications</li>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+          <div className="border border-white/10 rounded-2xl p-6 bg-black/60">
+            <h2 className="text-lg font-semibold mb-3">Strategy + Direction</h2>
+            <ul className="text-sm text-white/70 space-y-2">
+              <li>• Product storytelling and brand clarity</li>
+              <li>• KPI-driven experimentation</li>
+              <li>• Roadmaps aligned to business outcomes</li>
             </ul>
           </div>
-          <div className="border border-white/10 rounded-lg p-4 md:p-0 md:border-0">
-            <h2 className="text-2xl font-bold mb-4">SKILLS</h2>
-            <ul className="list-disc text-sm md:text-lg list-inside mb-4">
-              <li>React</li>
-              <li>Next.js</li>
-              <li>JavaScript</li>
-              <li>Node.js</li>
+          <div className="border border-white/10 rounded-2xl p-6 bg-black/60">
+            <h2 className="text-lg font-semibold mb-3">Engineering</h2>
+            <ul className="text-sm text-white/70 space-y-2">
+              <li>• React, Next.js, and TypeScript</li>
+              <li>• API design &amp; full-stack delivery</li>
+              <li>• Performance, accessibility, and QA</li>
             </ul>
           </div>
-          <div className="border border-white/10 rounded-lg p-4 md:p-0 md:border-0">
-            <h2 className="text-2xl font-bold mb-4">ADVICE</h2>
-            <ul className="list-disc text-sm md:text-lg list-inside">
-              <li>Change Management</li>
-              <li>Process Management</li>
-              <li>Organizational Development</li>
+          <div className="border border-white/10 rounded-2xl p-6 bg-black/60">
+            <h2 className="text-lg font-semibold mb-3">Leadership</h2>
+            <ul className="text-sm text-white/70 space-y-2">
+              <li>• Mentorship and coaching</li>
+              <li>• Cross-functional communication</li>
+              <li>• Continuous improvement mindset</li>
             </ul>
           </div>
         </div>
