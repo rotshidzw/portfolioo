@@ -50,7 +50,8 @@ function HeroSection() {
                   <span className="text-white">Developer</span>
                 </h1>
                 <p className="md:text-3xl text-lg">
-                  I’m a Full Stack Developer &amp; Software Engineer based in South Africa, Johannesburg.
+                  I’m a Full Stack Developer &amp; Software Engineer based in South Africa, Johannesburg, focused on React,
+                  Next.js, and scalable web systems.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
                   <a
