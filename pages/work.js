@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import TopNav from '../components/TopNav';
 import Footer from '@/components/footer';
@@ -21,12 +20,12 @@ const Work = () => {
                 performance, and business outcomes.
               </p>
             </div>
-            <Link
+            <a
               href="/lab"
               className="rounded-full border border-emerald-400/70 px-5 py-2 text-xs uppercase tracking-wide transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-200"
             >
               Visit Dev Lab
-            </Link>
+            </a>
           </div>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
