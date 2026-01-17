@@ -1,29 +1,7 @@
 import SectionTitle from './SectionTitle';
+import { experiences } from '@/data/experience';
 
 const Expreiance = () => {
-  const experiences = [
-    {
-      id: '01',
-      position: 'Web Developer & Data Analyst',
-      year: 'Mar 2024 - Present',
-      company: 'Bolunga, Midrand',
-      website: 'https://bolunga.co.za/',
-    },
-    {
-      id: '02',
-      position: 'Freelance Full Stack Developer',
-      year: 'Sep 2023 - Jan 2024',
-      company: 'Tech Genius, Remote',
-      website: 'https://techgenius.co.za/',
-    },
-    {
-      id: '03',
-      position: 'Mentor',
-      year: 'Mar 2021 - Oct 2022',
-      company: 'Microverse, Remote',
-      website: 'https://www.microverse.org/',
-    },
-  ];
   const stats = [
     {
       label: 'Completed Projects',
@@ -69,7 +47,10 @@ const Expreiance = () => {
                       className="border-b transition duration-300 ease-in-out hover:bg-neutral-900/30 dark:border-neutral-500"
                     >
                       <td className="whitespace-nowrap px-2 py-4 font-medium">{experience.id}</td>
-                      <td className="whitespace-nowrap px-2 py-4">{experience.position}</td>
+                      <td className="whitespace-nowrap px-2 py-4">
+                        <div className="font-semibold">{experience.position}</div>
+                        <div className="text-xs text-white/60">{experience.year}</div>
+                      </td>
                       <td className="whitespace-nowrap px-2 py-4">{experience.company}</td>
                       <td className="whitespace-nowrap px-2 py-4">
                         <a

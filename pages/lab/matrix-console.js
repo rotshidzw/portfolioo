@@ -19,11 +19,12 @@ const MatrixConsole = () => {
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
-      setOutput((prev) => [...prev, lines[index]]);
-      index += 1;
       if (index >= lines.length) {
         clearInterval(interval);
+        return;
       }
+      setOutput((prev) => [...prev, lines[index]]);
+      index += 1;
     }, 700);
 
     return () => clearInterval(interval);
@@ -73,7 +74,7 @@ const MatrixConsole = () => {
         <div className="rounded-xl border border-emerald-400/40 bg-black/80 p-6 font-mono text-sm space-y-2">
           {output.map((line, idx) => (
             <p key={`${line}-${idx}`} className="text-emerald-300">
-              {line.startsWith('>') ? line : `> ${line}`}
+              {typeof line === 'string' && line.startsWith('>') ? line : `> ${line ?? ''}`}
             </p>
           ))}
           <div className="flex items-center gap-2 text-white/70">
