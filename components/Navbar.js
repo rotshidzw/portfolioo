@@ -1,94 +1,119 @@
-import { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
-import { FaUser, FaSuitcase, FaStar, FaHome } from 'react-icons/fa';
 
+const Navbar = ({ sections = [], activeSection, onToggleTheme, theme }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-
-const Nav = ({ children }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-const scrollToHome = (router) => {
-  const homeSection = document.querySelector("#Home");
-  homeSection.scrollIntoView({ behavior: "smooth" });
-
-  if (router.pathname !== "/") {
-    router.push("/");
-  }
-};
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const router = useRouter();
-  const pageRef = useRef(null);
+  const navLinks = useMemo(
+    () =>
+      sections.map((section) => ({
+        id: section.id,
+        label: section.label,
+      })),
+    [sections]
+  );
 
   useEffect(() => {
-    if (router.query.scroll === "true") {
-      scrollToHome(router);
-    }
-  }, [router]);
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
 
-  const scrollToExperience = (router) => {
-    const aboutSection = document.querySelector("#Expriance");
-    aboutSection.scrollIntoView({ behavior: "smooth" });
-    if (router.pathname !== "/") {
-    router.push("/");
-  }
-};
-  const scrollToWork = () => {
-    const aboutSection = document.querySelector("#Work");
-    aboutSection.scrollIntoView({ behavior: "smooth" });
-    if (router.pathname !== "/") {
-    router.push("/");
-  }
-};
-  const scrollToAbout = () => {
-    const aboutSection = document.querySelector("#About");
-    aboutSection.scrollIntoView({ behavior: "smooth" });
-    if (router.pathname !== "/") {
-    router.push("/");
-  }
-};
-
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <>
-
-<div className="md:z-50 md:w-full md:h-16 md:max-w-lg md:-translate-x-1/2 md:border-2 border-2 md:rounded-md md:border-transparent md:bottom-4 md:left-1/2 fixed bottom-0 left-0 z-50 w-full h-16 border-t backdrop-filter backdrop-blur-sm dark:backdrop-blur-sm">
-  <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-    <button type="button" className="inline-flex md:border-r font-bold md:uppercase md:text-xl flex-col items-center justify-center px-8 hover:bg-black hover:text-white">
-      <svg className="md:hidden w-6 h-6 mb-1 text-white group-hover:text-white dark:group-hover:text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-      </svg>
-      <Link className="text-md text-white group-hover:text-white dark:group-hover:text-black uppercase" href="/" onClick={() => scrollToHome(router)}>chester</Link>
-    </button>
-    <button type="button" className="inline-flex md:border-r-2 md:uppercase md:text-lg flex-col items-center justify-center px-5 border-gray-200 hover:bg-black ">
-      <svg className="md:hidden w-6 h-6 mb-1 text-white group-hover:text-white dark:group-hover:text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M10 1a9 9 0 100 18 9 9 0 000-18zM7 7a1 1 0 011-1h4a1 1 0 010 2H8a1 1 0 01-1-1zm0 4a1 1 0 011-1h4a1 1 0 010 2H8a1 1 0 01-1-1zm0 4a1 1 0 011-1h4a1 1 0 010 2H8a1 1 0 01-1-1zm9-6a1 1 0 011 1v4a1 1 0 01-2 0V7a1 1 0 011-1zm-4-1a1 1 0 00-1 1v4a1 1 0 102 0V7a1 1 0 00-1-1z"></path>
-      </svg>
-      <span className="text-sm text-white group-hover:text-white dark:group-hover:text-black" href="/" onClick={() => scrollToExperience(router)}>Experience</span>
-    </button>
-    <button type="button" className="inline-flex md:border-r md:uppercase md:text-lg flex-col items-center justify-center px-5 hover:bg-black">
-      <svg className="md:hidden w-6 h-6 mb-1 text-white group-hover:text-white dark:group-hover:text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
-      </svg>
-            <span className="text-sm text-white  group-hover:text-white dark:group-hover:text-black"  href="/" onClick={() =>scrollToWork(router)}>My Work </span>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/60 bg-slate-50/80 backdrop-blur dark:border-white/10 dark:bg-slate-950/80">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          Rotshidzwa Mavhungu
+        </Link>
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className={`text-sm font-medium transition-colors hover:text-teal-600 dark:hover:text-teal-300 ${
+                activeSection === link.id
+                  ? 'text-teal-600 dark:text-teal-300'
+                  : 'text-slate-600 dark:text-slate-200/80'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="rounded-full border border-slate-300 px-3 py-1 text-sm font-medium text-slate-700 transition hover:border-teal-500 hover:text-teal-600 dark:border-white/20 dark:text-white/80 dark:hover:border-teal-400 dark:hover:text-teal-200"
+          >
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          </button>
+        </div>
+        <button
+          type="button"
+          className="inline-flex items-center justify-center rounded-full border border-slate-300 p-2 text-slate-700 transition hover:border-teal-500 hover:text-teal-600 dark:border-white/20 dark:text-white/80 dark:hover:border-teal-400 dark:hover:text-teal-200 md:hidden"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation"
+        >
+          <span className="sr-only">Toggle navigation</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d={
+                menuOpen
+                  ? 'M6.293 4.293a1 1 0 011.414 0L10 6.586l2.293-2.293a1 1 0 111.414 1.414L11.414 8l2.293 2.293a1 1 0 01-1.414 1.414L10 9.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 8 6.293 5.707a1 1 0 010-1.414z'
+                  : 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z'
+              }
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
-        <button type="button" className="inline-flex  md:uppercase md:text-lg flex-col items-center justify-center px-5 border-gray-200 hover:bg-black  dark:border-black">
-            <svg className="md:hidden w-6 h-6 mb-1 text-white  group-hover:text-white dark:group-hover:text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path clip-rule="evenodd" fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"></path>
-            </svg>
-            <span className="text-sm text-white  group-hover:text-white dark:group-hover:text-black" href="/" onClick={() =>scrollToAbout(router)}>About Me  </span>
-        </button>
-    </div>
-
-</div>
-
- <main>
-        { children }
- </main>
-  </>
+      </nav>
+      {menuOpen && (
+        <div
+          id="mobile-menu"
+          className="border-t border-slate-200/60 bg-slate-50/95 px-4 py-4 dark:border-white/10 dark:bg-slate-950/95 md:hidden"
+        >
+          <div className="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={`text-sm font-medium transition-colors hover:text-teal-600 dark:hover:text-teal-300 ${
+                  activeSection === link.id
+                    ? 'text-teal-600 dark:text-teal-300'
+                    : 'text-slate-600 dark:text-slate-200/80'
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                onToggleTheme();
+                setMenuOpen(false);
+              }}
+              className="self-start rounded-full border border-slate-300 px-3 py-1 text-sm font-medium text-slate-700 transition hover:border-teal-500 hover:text-teal-600 dark:border-white/20 dark:text-white/80 dark:hover:border-teal-400 dark:hover:text-teal-200"
+            >
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
   );
-}
+};
 
-export default Nav
+export default Navbar;
