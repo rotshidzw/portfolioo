@@ -3,55 +3,56 @@ import SectionTitle from './SectionTitle';
 const Awards = () => {
   return (
     <>
-      <SectionTitle
-        title="Credential"
-        subtitle="My work has been recognized by industry experts."
-      />
-      <hr className="border-gray-300/40 mb-8 my-4 w-full" />
-
-      <div className="text-white mt-10 mb-16 md:text-3xl text-left">
-        <ol className="max-w-lg mx-auto space-y-6">
-          <li>
-            <a
-              href="https://www.credential.net/ba7844de-cc3a-4835-a3d0-0079a93a4cca"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              01. Microverse Ruby/Databases
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.credential.net/e3529ca8-9fe5-4cb8-9cdd-2c6ae722c1f3"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              02. Microverse React &amp; Redux
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.credential.net/c917cafa-b0a6-4fc5-be27-1741b442d7af"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              03. Microverse JavaScript
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.credential.net/9f401a1e-1350-4336-b0ca-8824cc60474b"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              04. Microverse HTML/CSS
-            </a>
-          </li>
-        </ol>
+      <SectionTitle title="Credentials" subtitle="Recognition and certifications earned." />
+      <div className="text-white mt-10 mb-16 px-4">
+        <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-black/60 p-6 md:p-8">
+          <ol className="space-y-4 text-sm md:text-base">
+            <li className="flex items-start gap-3">
+              <span className="text-emerald-300 font-semibold">01</span>
+              <a
+                href="https://www.credential.net/ba7844de-cc3a-4835-a3d0-0079a93a4cca"
+                className="hover:underline text-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Microverse Ruby/Databases
+              </a>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-emerald-300 font-semibold">02</span>
+              <a
+                href="https://www.credential.net/e3529ca8-9fe5-4cb8-9cdd-2c6ae722c1f3"
+                className="hover:underline text-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Microverse React &amp; Redux
+              </a>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-emerald-300 font-semibold">03</span>
+              <a
+                href="https://www.credential.net/c917cafa-b0a6-4fc5-be27-1741b442d7af"
+                className="hover:underline text-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Microverse JavaScript
+              </a>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-emerald-300 font-semibold">04</span>
+              <a
+                href="https://www.credential.net/9f401a1e-1350-4336-b0ca-8824cc60474b"
+                className="hover:underline text-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Microverse HTML/CSS
+              </a>
+            </li>
+          </ol>
+        </div>
       </div>
     </>
   );

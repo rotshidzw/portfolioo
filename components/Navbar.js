@@ -6,12 +6,12 @@ const BottomNavItem = ({ label, onClick, isActive, children }) => {
       type="button"
       onClick={onClick}
       aria-current={isActive ? 'true' : undefined}
-      className={`inline-flex md:border-r md:uppercase md:text-lg flex-col items-center justify-center px-5 transition-all duration-200 hover:bg-black hover:-translate-y-0.5 ${
+      className={`inline-flex flex-col items-center justify-center px-3 py-1 transition-all duration-200 hover:bg-black hover:-translate-y-0.5 md:px-5 md:uppercase md:text-lg ${
         isActive ? 'bg-black text-white' : 'text-white'
       }`}
     >
       {children}
-      <span className={`text-sm uppercase ${isActive ? 'text-white' : 'text-white/80'} md:text-base`}>
+      <span className={`text-[10px] uppercase ${isActive ? 'text-white' : 'text-white/80'} md:text-base`}>
         {label}
       </span>
     </button>
@@ -66,8 +66,8 @@ const Nav = () => {
   };
 
   return (
-    <div className="md:z-50 md:w-full md:h-16 md:max-w-lg md:-translate-x-1/2 md:border-2 border-2 md:rounded-md md:border-transparent md:bottom-4 md:left-1/2 fixed bottom-0 left-0 z-50 w-full h-16 border-t backdrop-filter backdrop-blur-sm bg-black/70">
-      <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-white/10 bg-black/80 backdrop-blur-sm md:bottom-4 md:left-1/2 md:h-14 md:w-full md:max-w-md md:-translate-x-1/2 md:rounded-full md:border md:border-white/10">
+      <div className="mx-auto grid h-14 max-w-md grid-cols-4 font-medium">
         {navItems.map((item) => (
           <BottomNavItem
             key={item.id}
@@ -76,7 +76,7 @@ const Nav = () => {
             isActive={activeSection === item.id}
           >
             <svg
-              className="md:hidden w-6 h-6 mb-1 text-white"
+              className="md:hidden mb-1 h-5 w-5 text-white"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
