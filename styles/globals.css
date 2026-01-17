@@ -2,38 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-
-  
-body{
-    background-color: black;
- }
-
-#Home{
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+html {
+  scroll-behavior: smooth;
 }
 
-#Footer {
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640027182bd1b6ef777b221a_footer-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
-.work{
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+body {
+  background-color: #f8fafc;
 }
 
-@keyframes rotateAnimation {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+.dark body {
+  background-color: #020617;
+}
 
-.lets-work-text {
-   
-    animation: rotateAnimation 10s infinite linear;
-  }
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

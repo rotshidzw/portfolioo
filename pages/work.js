@@ -1,223 +1,171 @@
-import React, { useState } from "react";
-import Navbar  from '../components/Navbar';
-import Footer from "@/components/footer";
+import Head from 'next/head';
+import { useEffect, useMemo, useState } from 'react';
+import Layout from '@/components/Layout';
+import Section from '@/components/Section';
+import Card from '@/components/Card';
+import Badge from '@/components/Badge';
+import { filters, projects } from '@/data/portfolioData';
+
 const Work = () => {
-  const handleSendMessage = () => {
-    window.location.href = 'mailto:rochidzwachester@gmail.com';
-  };
-  const [showMore, setShowMore] = useState(false);
-  const cards = [
+  const [activeSection, setActiveSection] = useState('projects');
+  const [theme, setTheme] = useState('dark');
+  const [selectedFilter, setSelectedFilter] = useState('All');
 
-  ];
+  const sections = useMemo(
+    () => [
+      { id: 'projects', label: 'Projects' },
+      { id: 'contact', label: 'Contact' },
+    ],
+    []
+  );
 
-  const handleClick = () => {
-    setShowMore(true);
+  useEffect(() => {
+    const storedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+    const prefersDark =
+      typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(initialTheme);
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+  }, []);
+
+  useEffect(() => {
+    const sectionElements = sections
+      .map((section) => document.getElementById(section.id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sectionElements.forEach((section) => observer.observe(section));
+
+    return () => {
+      sectionElements.forEach((section) => observer.unobserve(section));
+    };
+  }, [sections]);
+
+  const handleToggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', nextTheme);
+    }
+    document.documentElement.classList.toggle('dark', nextTheme === 'dark');
   };
+
+  const filteredProjects = projects.filter((project) =>
+    selectedFilter === 'All' ? true : project.category === selectedFilter
+  );
+
   return (
-   <>
-   <Navbar />
-   <div className="work">
-   <div className="text-xl md:text-8xl  mb-4 py-16 text-white flex flex-row justify-between  items-center" id="Work">
-  <h1 className="md:text-left font-bold">MY DIGITAL <br /> PORTFOLIO</h1>
-  <h3 className="text-sm px-4 md:text-3xl justify-end text-right relative">
-{/* eslint-disable no-alert, no-console */}
-  <img src="https://assets.website-files.com/63f22b1aac84aa899ace5dcb/6402d63ebac136effe67fce0_lets-together-text.svg" loading="lazy" alt="Lets Together Image" className="lets-work-text h-20 w-20 md:h-32 md:w-32" />
-{/* eslint-disable no-alert, no-console */}
-  <img src="https://assets.website-files.com/63f22b1aac84aa899ace5dcb/64003210442ed82c3c705d6c_right-arrow-work.svg" loading="lazy" alt="Right Arrow Work"  className="arrow-icon absolute top-1/2 md:right-16 right-10 sm:right-12 transform -translate-y-1/2 h-8 w-8 md:h-12 md:w-12 cursor-pointer"  onClick={handleSendMessage} />
-</h3>
-</div>
-<hr className="border-gray-300 my-4 py-14 w-full" />
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-2 gap-4">
-    <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img  src="https://user-images.githubusercontent.com/69056906/226124010-b79b0763-8c33-4776-b70a-53f65d80a1ae.png" alt="Project 1" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">News</h3>
-      <p className="text-gray-600 mb-4">is a news and content platform that covers a wide range of topics such as current events, politics, sports, and lifestyle.</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://feed-news.netlify.app/" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
+    <Layout
+      sections={sections}
+      activeSection={activeSection}
+      onToggleTheme={handleToggleTheme}
+      theme={theme}
+    >
+      <Head>
+        <title>Rotshidzwa Chester Mavhungu – Project Archive</title>
+        <meta
+          name="description"
+          content="A deeper look at Rotshidzwa Chester Mavhungu's front-end and full-stack project portfolio."
+        />
+      </Head>
 
-      <a href="https://github.com/rotshidzw/peca" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
+      <Section id="projects" title="Project Archive" subtitle="Case studies & demos">
+        <p className="max-w-2xl text-sm text-slate-600 dark:text-slate-200/80">
+          Browse the full set of web projects, each focused on clean UI, responsiveness, and clear product storytelling.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              type="button"
+              onClick={() => setSelectedFilter(filter)}
+              className={`rounded-full border px-4 py-1 text-xs font-semibold transition ${
+                selectedFilter === filter
+                  ? 'border-teal-400 bg-teal-400 text-slate-900'
+                  : 'border-slate-300 text-slate-600 hover:border-teal-500 hover:text-teal-600 dark:border-white/20 dark:text-slate-200/80 dark:hover:border-teal-400'
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+        <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProjects.map((project) => (
+            <Card key={project.name}>
+              <div className="overflow-hidden rounded-xl border border-slate-200/80 dark:border-white/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={project.image} alt={`${project.name} preview`} className="h-44 w-full object-cover" />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{project.name}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-200/80">{project.description}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag}>{tag}</Badge>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-teal-600 transition hover:text-teal-500 dark:text-teal-300"
+                  >
+                    Live demo →
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-teal-600 transition hover:text-teal-500 dark:text-teal-300"
+                  >
+                    GitHub →
+                  </a>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
 
-  <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img src="https://user-images.githubusercontent.com/69056906/235224391-f1dc04a4-caf1-4748-85ec-937777ecceb2.png" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">The-Crystal-Project</h3>
-      <p className="text-gray-600 mb-4">The template also includes pages for services, pricing, and booking, as well</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://storied-sunburst-99dd6f.netlify.app/" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-
-      <a href="https://github.com/rotshidzw/the-crystal-project" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img src="https://user-images.githubusercontent.com/69056906/235226287-4ca825bc-7629-48d6-a26e-7996d0cd904f.png" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">Landing page</h3>
-      <p className="text-gray-600 mb-4"> functionality for visitors who want to Go Live about the business</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://main--friendly-genie-e6ae39.netlify.app/" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-
-      <a href="https://github.com/rotshidzw/product-landing-page" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C4D2DAQHRh0zghIg-fw/profile-treasury-image-shrink_800_800/0/1661087307885?e=1683993600&v=beta&t=x6VlJeJWHk7pogj_FufjQ8zgvS37CKc2Svi8Zrnq8cw" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">TVMaze</h3>
-      <p className="text-gray-600 mb-4">an api based app to show lastest shows (movies , series)</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://hammaazarok.github.io/javascript-capstone/" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-
-      <a href="https://github.com/hammaazarok/javascript-capstone" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C562DAQHJY9NqVsCPBQ/profile-treasury-image-shrink_800_800/0/1679164086369?e=1683993600&v=beta&t=fIa7AxWDVMwOVxcuOwtBhupI8QFTdTdf8KpyIpfhZRs" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">Real State Agent</h3>
-      <p className="text-gray-600 mb-4">real state agent web page I’ve helped families determine their home’s worth, set the right price, and negotiate a winning deal.</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="gregarious-dragon-a4fbcc.netlify.app/?" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-
-      <a href="https://github.com/rotshidzw/landingpage" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div className="bg-white rounded-lg shadow-lg">
-  {/* eslint-disable no-alert, no-console */}
-    <img src="https://media.licdn.com/dms/image/C562DAQFw1l0l09Cblw/profile-treasury-image-shrink_800_800/0/1679163982680?e=1683993600&v=beta&t=iOb2wSALsmJrXPY-CyuFBPo0SzN7caqQ6z5J43RlHRs" alt="Project 2" className="w-full h-48 object-cover rounded-t-lg" />
-    <div className="p-4">
-      <h3 className="text-xl font-bold mb-2">Anti Da Menace landing page</h3>
-      <p className="text-gray-600 mb-4">shows off his youtube videos and his playlist its done by using googleapi to show all the info the rapper antidamanace including the functioning contact form furthermore the about which include who he is</p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 px-2 gap-4">
-      <a href="https://antidamenace.netlify.app/" className="flex items-center text-purple-600">
-        Go Live
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-
-      <a href="https://github.com/rotshidzw/nextjsapi" className="flex items-center text-purple-600">
-        Git code
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z" clipRule="evenodd" />
-        </svg>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {cards.slice(0, showMore ? cards.length : 6).map((card, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg">
-          {/* eslint-disable no-alert, no-console */}
-            <img
-              src={card.image}
-              alt={card.projectName}
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-bold mb-2">{card.projectName}</h3>
-              <p className="text-gray-600 mb-4">{card.description}</p>
+      <Section id="contact" title="Let&apos;s connect" subtitle="Open for roles">
+        <Card>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Interested in working together?</h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-200/80">
+                I&apos;m happy to share walkthroughs, code samples, and deployment details.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
               <a
-                href={card.link}
-                className="flex items-center text-purple-600"
+                href="mailto:rochidzwachester@gmail.com"
+                className="rounded-full bg-teal-400 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-teal-300"
               >
-                Learn More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 ml-1"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M6 6a.75.75 0 01.75-.75h6.5a.75.75 0 01.75.75v6.5a.75.75 0 11-1.5 0V6.56L4.72 14.78a.75.75 0 11-1.06-1.06L11.44 6H6z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                Email me
+              </a>
+              <a
+                href="/"
+                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-teal-500 hover:text-teal-600 dark:border-white/20 dark:text-white/80 dark:hover:border-teal-400"
+              >
+                Back to home
               </a>
             </div>
           </div>
-        ))}
-      </div>
-      {cards.length > 6 && !showMore && (
-        <div className="flex justify-center mt-4">
-          <button
-            className="rounded-full bg-purple-600 text-white py-2 px-4"
-            onClick={handleClick}
-          >
-            See More
-          </button>
-        </div>
-      )}
-    </div>
-</div>
-</div>
-<Footer />
-   </>
-  )
-}
+        </Card>
+      </Section>
+    </Layout>
+  );
+};
 
-export default Work
+export default Work;
