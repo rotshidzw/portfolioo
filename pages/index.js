@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import TopNav from '../components/TopNav';
+import MatrixBackground from '../components/MatrixBackground';
 import Hero from '../components/HeroSection';
 import About from '@/components/About';
 import Work from '@/components/Work';
@@ -26,6 +27,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <MatrixBackground />
       <TopNav />
       <Navbar />
       <Hero />

@@ -68,13 +68,23 @@ const ContactPage = () => {
           </button>
         </form>
         {status ? (
-          <p className="mt-4 text-sm text-emerald-300">
-            {status === 'loading'
-              ? 'Sending...'
-              : status === 'success'
-                ? 'Message sent successfully.'
-                : `Error: ${status}`}
-          </p>
+          <div className="mt-4 text-sm text-emerald-300 space-y-2">
+            <p>
+              {status === 'loading'
+                ? 'Sending...'
+                : status === 'success'
+                  ? 'Message sent successfully.'
+                  : `Error: ${status}`}
+            </p>
+            {status !== 'success' && status !== 'loading' ? (
+              <a
+                href="mailto:rochi.chester@gmail.com"
+                className="underline text-emerald-200 hover:text-emerald-100"
+              >
+                Email me directly at rochi.chester@gmail.com
+              </a>
+            ) : null}
+          </div>
         ) : null}
       </main>
     </div>

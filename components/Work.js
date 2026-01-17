@@ -49,6 +49,14 @@ const projects = [
     liveLink: 'https://antidamenace.netlify.app/',
     githubLink: 'https://github.com/rotshidzw/nextjsapi',
   },
+  {
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    title: 'Splunk Dashboard Overview',
+    description:
+      'Security monitoring dashboard highlighting real-time data analysis and alerting workflows.',
+    liveLink: '/lab/splunk-snapshot',
+    githubLink: 'https://github.com/rotshidzw',
+  },
 ];
 
 const Work = () => {

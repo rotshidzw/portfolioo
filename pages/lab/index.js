@@ -30,6 +30,16 @@ const labTiles = [
     description: 'Lightweight dashboard highlighting e-waste project impact.',
     href: '/lab/e-waste-dashboard',
   },
+  {
+    title: 'SysAdmin Monitor',
+    description: 'Mock system admin panel with uptime and service status.',
+    href: '/lab/sysadmin-monitor',
+  },
+  {
+    title: 'Splunk Snapshot',
+    description: 'Security analytics view inspired by Splunk dashboards.',
+    href: '/lab/splunk-snapshot',
+  },
 ];
 
 const LabPage = () => {

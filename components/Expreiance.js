@@ -4,31 +4,24 @@ const Expreiance = () => {
   const experiences = [
     {
       id: '01',
-      position: 'Business Administration',
-      year: '2020',
-      company: 'Thusanyo investment',
-      website: 'https://thusanyo.co.za/',
+      position: 'Web Developer & Data Analyst',
+      year: 'Mar 2024 - Present',
+      company: 'Bolunga, Midrand',
+      website: 'https://bolunga.co.za/',
     },
     {
       id: '02',
-      position: 'Front End Developer',
-      year: '2021',
-      company: 'Microverse',
-      website: 'https://www.microverse.org/',
+      position: 'Freelance Full Stack Developer',
+      year: 'Sep 2023 - Jan 2024',
+      company: 'Tech Genius, Remote',
+      website: 'https://techgenius.co.za/',
     },
     {
       id: '03',
       position: 'Mentor',
-      year: '2022',
-      company: 'Microverse',
+      year: 'Mar 2021 - Oct 2022',
+      company: 'Microverse, Remote',
       website: 'https://www.microverse.org/',
-    },
-    {
-      id: '04',
-      position: 'Front End Developer',
-      year: '2022',
-      company: 'Gybe africa',
-      website: 'https://www.linkedin.com/company/gybe-africa',
     },
   ];
   const stats = [
