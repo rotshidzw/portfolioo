@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import TopNav from '../components/TopNav';
 import Footer from '@/components/footer';
 import ProjectCard from '@/components/ProjectCard';
 
@@ -57,6 +58,7 @@ const Work = () => {
 
   return (
     <>
+      <TopNav />
       <Navbar />
       <div className="work">
         <div className="text-xl md:text-8xl mb-4 py-16 text-white flex flex-row justify-between items-center" id="Work">

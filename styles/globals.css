@@ -52,3 +52,8 @@ body {
 .lets-work-text {
   animation: rotateAnimation 10s infinite linear;
 }
+
+.lab-grid-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(16, 185, 129, 0.25) 1px, transparent 0);
+  background-size: 24px 24px;
+}

@@ -61,6 +61,12 @@ function HeroSection() {
                   >
                     Download CV
                   </a>
+                  <a
+                    href="/lab"
+                    className="rounded-full border border-emerald-400/60 px-5 py-2 text-sm uppercase tracking-wide transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-200"
+                  >
+                    Enter Dev Lab
+                  </a>
                   <button
                     type="button"
                     onClick={scrollToAbout}
