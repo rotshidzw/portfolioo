@@ -2,38 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 
-  
-body{
-    background-color: black;
- }
+body {
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+  padding-bottom: 5rem;
+}
 
-#Home{
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+#Home {
+  background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 #Footer {
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640027182bd1b6ef777b221a_footer-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+  background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640027182bd1b6ef777b221a_footer-vector.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
-.work{
-    background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+
+.work {
+  background-image: url('https://assets.website-files.com/63f22b1aac84aa899ace5dcb/640026db0539cf709a89890d_red-vector.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 @keyframes rotateAnimation {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .lets-work-text {
-   
-    animation: rotateAnimation 10s infinite linear;
-  }
+  animation: rotateAnimation 10s infinite linear;
+}
+
+.lab-grid-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(16, 185, 129, 0.25) 1px, transparent 0);
+  background-size: 24px 24px;
+}
