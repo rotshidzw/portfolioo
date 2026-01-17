@@ -40,6 +40,11 @@ const labTiles = [
     description: 'Security analytics view inspired by Splunk dashboards.',
     href: '/lab/splunk-snapshot',
   },
+  {
+    title: 'Ops Console',
+    description: 'Incident triage workspace for logging and resolving alerts.',
+    href: '/lab/ops-console',
+  },
 ];
 
 const LabPage = () => {

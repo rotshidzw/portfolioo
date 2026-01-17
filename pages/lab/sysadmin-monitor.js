@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MatrixBackground from '@/components/MatrixBackground';
 import TopNav from '@/components/TopNav';
@@ -10,6 +10,21 @@ const initialServices = [
   { name: 'Telemetry', status: 'Online', owner: 'ops' },
 ];
 
+const baseCommandCatalog = [
+  { cmd: 'help', description: 'List available commands.' },
+  { cmd: 'status', description: 'Summarize uptime, latency, and alerts.' },
+  { cmd: 'services', description: 'List service health.' },
+  { cmd: 'restart <service>', description: 'Restart a named service.' },
+  { cmd: 'maintenance <service>', description: 'Toggle maintenance mode.' },
+  { cmd: 'resolve <id>', description: 'Resolve an alert by ID.' },
+  { cmd: 'healthcheck', description: 'Run a quick health check.' },
+  { cmd: 'simulate', description: 'Simulate a new incident.' },
+  { cmd: 'df', description: 'Show disk usage snapshot.' },
+  { cmd: 'free', description: 'Show memory usage snapshot.' },
+  { cmd: 'top', description: 'Show CPU load snapshot.' },
+  { cmd: 'clear', description: 'Clear console output.' },
+];
+
 const SysAdminMonitor = () => {
   const [uptime, setUptime] = useState(99.98);
   const [latency, setLatency] = useState(42);
@@ -18,6 +33,11 @@ const SysAdminMonitor = () => {
     { id: 'AL-221', message: 'DB replica lag above 2s', severity: 'High' },
   ]);
   const [actionLog, setActionLog] = useState([]);
+  const [consoleOutput, setConsoleOutput] = useState([
+    'sysadmin@lab:~$ status',
+    'Uptime 99.98% · Latency 42ms · Alerts 1',
+  ]);
+  const [consoleInput, setConsoleInput] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +47,8 @@ const SysAdminMonitor = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const commandCatalog = useMemo(() => baseCommandCatalog, []);
 
   const logAction = (message) => {
     setActionLog((prev) => [{ message, time: new Date().toLocaleTimeString() }, ...prev].slice(0, 6));
@@ -74,6 +96,100 @@ const SysAdminMonitor = () => {
     logAction('Health check completed');
   };
 
+  const appendConsole = (lines) => {
+    const normalized = Array.isArray(lines) ? lines : [lines];
+    setConsoleOutput((prev) => [...prev, ...normalized]);
+  };
+
+  const runConsoleCommand = () => {
+    if (!consoleInput.trim()) return;
+    const raw = consoleInput.trim();
+    const parts = raw.split(' ');
+    const command = parts[0].toLowerCase();
+    const args = parts.slice(1).join(' ');
+
+    if (command === 'clear') {
+      setConsoleOutput([]);
+      setConsoleInput('');
+      return;
+    }
+
+    let responseLines = [];
+
+    switch (command) {
+      case 'help':
+        responseLines = [
+          'Available commands:',
+          ...commandCatalog.map((item) => `- ${item.cmd}: ${item.description}`),
+        ];
+        break;
+      case 'status':
+        responseLines = [`Uptime ${uptime.toFixed(2)}% · Latency ${Math.round(latency)}ms · Alerts ${alerts.length}`];
+        break;
+      case 'services':
+        responseLines = services.map((service) => `${service.name}: ${service.status}`);
+        break;
+      case 'restart':
+        if (!args) {
+          responseLines = ['Usage: restart <service>'];
+          break;
+        }
+        setServices((prev) =>
+          prev.map((service) =>
+            service.name.toLowerCase().includes(args.toLowerCase())
+              ? { ...service, status: 'Online' }
+              : service
+          )
+        );
+        responseLines = [`Restarting ${args}... OK`];
+        break;
+      case 'maintenance':
+        if (!args) {
+          responseLines = ['Usage: maintenance <service>'];
+          break;
+        }
+        setServices((prev) =>
+          prev.map((service) =>
+            service.name.toLowerCase().includes(args.toLowerCase())
+              ? { ...service, status: service.status === 'Maintenance' ? 'Online' : 'Maintenance' }
+              : service
+          )
+        );
+        responseLines = [`Toggled maintenance for ${args}.`];
+        break;
+      case 'resolve':
+        if (!args) {
+          responseLines = ['Usage: resolve <id>'];
+          break;
+        }
+        setAlerts((prev) => prev.filter((alert) => alert.id.toLowerCase() !== args.toLowerCase()));
+        responseLines = [`Alert ${args.toUpperCase()} resolved.`];
+        break;
+      case 'healthcheck':
+        runHealthCheck();
+        responseLines = ['Health check completed.'];
+        break;
+      case 'simulate':
+        simulateIncident();
+        responseLines = ['Incident injected into service mesh.'];
+        break;
+      case 'df':
+        responseLines = ['Filesystem /dev/sda1 71% used · /var 58% used'];
+        break;
+      case 'free':
+        responseLines = ['Memory 68% used · Swap 3% used'];
+        break;
+      case 'top':
+        responseLines = ['CPU load 0.74 · 1.02 · 0.88 (1m/5m/15m)'];
+        break;
+      default:
+        responseLines = ['Command not recognized. Type help for options.'];
+    }
+
+    appendConsole([`sysadmin@lab:~$ ${raw}`, ...responseLines]);
+    setConsoleInput('');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white relative">
       <MatrixBackground />
@@ -90,8 +206,8 @@ const SysAdminMonitor = () => {
         </div>
         <h1 className="text-3xl md:text-5xl font-bold mb-4">SysAdmin Monitor</h1>
         <p className="text-white/70 max-w-2xl mb-8">
-          Live system overview with service health, uptime, and operator actions. Use the controls to remediate issues and
-          keep the stack stable.
+          Live system overview with service health, uptime, and operator actions. Use the controls or the console to
+          remediate issues and keep the stack stable.
         </p>
         <div className="grid gap-6 md:grid-cols-3">
           <div className="border border-emerald-400/40 rounded-xl p-4 bg-black/70">
@@ -206,6 +322,31 @@ const SysAdminMonitor = () => {
                 )}
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="mt-8 border border-emerald-400/40 rounded-xl p-6 bg-black/70">
+          <h2 className="text-lg font-semibold mb-4">Admin Console</h2>
+          <div className="space-y-2 font-mono text-sm text-emerald-200">
+            {consoleOutput.map((line, index) => (
+              <div key={`${line}-${index}`}>{line}</div>
+            ))}
+          </div>
+          <div className="mt-4 flex items-center gap-2 text-white/70">
+            <span>$</span>
+            <input
+              value={consoleInput}
+              onChange={(event) => setConsoleInput(event.target.value)}
+              onKeyDown={(event) => (event.key === 'Enter' ? runConsoleCommand() : null)}
+              className="bg-transparent border-none outline-none flex-1 text-emerald-200"
+              placeholder="Type a command..."
+            />
+            <button
+              type="button"
+              onClick={runConsoleCommand}
+              className="border border-emerald-400/50 px-2 py-1 rounded text-xs hover:border-emerald-300"
+            >
+              Run
+            </button>
           </div>
         </div>
       </main>
