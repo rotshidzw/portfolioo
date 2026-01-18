@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
@@ -65,12 +66,12 @@ function HeroSection() {
                 >
                   Download CV
                 </a>
-                <a
+                <Link
                   href="/lab"
                   className="rounded-full border border-emerald-400/70 px-5 py-2 text-xs uppercase tracking-wide transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-200"
                 >
                   Explore Dev Lab
-                </a>
+                </Link>
                 <button
                   type="button"
                   onClick={scrollToAbout}
@@ -116,9 +117,9 @@ function HeroSection() {
                 <p className="mt-2">
                   Jump into the Dev Lab to explore interactive demos, sysadmin tooling, and a live matrix console.
                 </p>
-                <a href="/lab" className="inline-flex mt-3 text-emerald-300 hover:text-emerald-200">
+                <Link href="/lab" className="inline-flex mt-3 text-emerald-300 hover:text-emerald-200">
                   Enter Dev Lab →
-                </a>
+                </Link>
               </div>
             </div>
           </div>
